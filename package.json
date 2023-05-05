@@ -1,0 +1,11 @@
+{
+  "name": "@remla23-team13/remla-lib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "VersionUtil.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
