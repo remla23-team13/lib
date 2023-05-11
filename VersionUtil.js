@@ -1,7 +1,7 @@
-import version from 'package.json';
+import json from './package.json';
 
-class VersionUtil {
-    getVersion() {
-        return version;
+export class VersionUtil {
+    static getVersion() {
+        return json.version
     }
 }
