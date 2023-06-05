@@ -5,6 +5,7 @@ setup(
   version = open("remlalib/_version.py").readlines()[-1].split()[-1].strip("\"'"),
   license='MIT',
   description = 'REMLA23 - Team 13 - Lib',
+  long_description= 'REMLA23 - Team 13 - Lib',
   author = 'Team 13',
   author_email = 'gasparsantosrocha@gmail.com',
   url = 'https://github.com/remla23-team13/lib',
