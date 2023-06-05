@@ -11,12 +11,24 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
+      - name: Parse version info from tag
+        run: |
+          # GITHUB_REF is like refs/tags/v2.3.5, so strip the first 11 chars
+          VERSION=${GITHUB_REF:11}
+          MAJOR=`echo "$VERSION" | cut -d . -f 1`
+          MINOR=`echo "$VERSION" | cut -d . -f 2`
+          PATCH=`echo "$VERSION" | cut -d . -f 3`
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "version_major=$MAJOR" >> $GITHUB_ENV
+          echo "version_minor=$MINOR" >> $GITHUB_ENV
+          echo "version_patch=$PATCH" >> $GITHUB_ENV
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
       - name: Set up Versioning
-        run: echo '__version__ = "${{ env.version }}"' > remlalib/_version.py
+        run: echo '__version__ = "${{ env.version }}"' > remlalib/_version.py |
+          cat remlalib/_version.py
       - name: Install pypa/build
         run: >-
           python3 -m
