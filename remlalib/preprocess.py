@@ -4,11 +4,20 @@ from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
-from joblib import dump
+from joblib import load
+from urllib.request import urlopen
+
 
 class Preprocess:
 
-    count_vectorizer = CountVectorizer(max_features=1420)
+    # load a default preprocessor
+    def __init__(self):
+        self.count_vectorizer = None
+
+    def load_from_url(self, url):
+        """Load a preprocessor from a url"""
+        with urlopen(url) as file:
+            self.count_vectorizer = load(file)
 
     def load_dataset(data_path):
         """Load dataset from data_path"""
@@ -45,7 +54,7 @@ class Preprocess:
     def preprocess_dataset(self, dataset):
         """Preprocess the dataset and save it"""
         corpus = self.get_corpus(dataset)
-
+        self.count_vectorizer = CountVectorizer(max_features=1420)
         X = self.count_vectorizer.fit_transform(corpus).toarray()
         y = dataset.iloc[:, -1].values
 
