@@ -12,7 +12,10 @@ setup(
   download_url = 'https://github.com/remla23-team13/lib',
   keywords = ['REMLA', 'Versioning'],
   install_requires=[
-      'setuptools'
+      'setuptools',
+      'pandas',
+      'nltk',
+      'scikit-learn'
   ],
   classifiers=[
     'Development Status :: 3 - Alpha',
