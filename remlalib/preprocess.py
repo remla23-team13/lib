@@ -19,11 +19,11 @@ class Preprocess:
         with urlopen(url) as file:
             self.count_vectorizer = load(file)
 
-    def load_dataset(data_path) -> pd.DataFrame:
+    def load_dataset(self, data_path) -> pd.DataFrame:
         """Load dataset from data_path"""
         return pd.read_csv(data_path, delimiter='\t', quoting=3)
 
-    def _get_stopwords() -> list:
+    def _get_stopwords(self) -> list:
         """Obtain the list of stopwords"""
         nltk.download('stopwords')
 
