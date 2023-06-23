@@ -14,16 +14,16 @@ class Preprocess:
     def __init__(self):
         self.count_vectorizer = None
 
-    def load_from_url(self, url):
+    def load_from_url(self, url) -> None:
         """Load a preprocessor from a url"""
         with urlopen(url) as file:
             self.count_vectorizer = load(file)
 
-    def load_dataset(data_path):
+    def load_dataset(data_path) -> pd.DataFrame:
         """Load dataset from data_path"""
         return pd.read_csv(data_path, delimiter='\t', quoting=3)
 
-    def _get_stopwords():
+    def _get_stopwords() -> list:
         """Obtain the list of stopwords"""
         nltk.download('stopwords')
 
@@ -33,7 +33,7 @@ class Preprocess:
         return all_stopwords
 
 
-    def _get_corpus(self, dataset):
+    def _get_corpus(self, dataset) -> list:
         """produce the corpus from the dataset by applying preprocessing steps"""
         all_stopwords = self.get_stopwords()
         corpus = []
@@ -51,15 +51,15 @@ class Preprocess:
         return corpus
 
 
-    def preprocess_dataset(self, dataset):
+    def preprocess_dataset(self, dataset) -> tuple:
         """Preprocess the dataset and save it"""
-        corpus = self.get_corpus(dataset)
+        corpus = self._get_corpus(dataset)
         self.count_vectorizer = CountVectorizer(max_features=1420)
         X = self.count_vectorizer.fit_transform(corpus).toarray()
         y = dataset.iloc[:, -1].values
 
         return X, y
 
-    def preprocess_sample(self, review):
+    def preprocess_sample(self, review) -> list:
         """Preprocess the sample review and return it"""
         return self.count_vectorizer.transform([review]).toarray()[0]
