@@ -35,7 +35,7 @@ class Preprocess:
 
     def _get_corpus(self, dataset) -> list:
         """produce the corpus from the dataset by applying preprocessing steps"""
-        all_stopwords = self.get_stopwords()
+        all_stopwords = self._get_stopwords()
         corpus = []
 
         porter_stemmer = PorterStemmer()
